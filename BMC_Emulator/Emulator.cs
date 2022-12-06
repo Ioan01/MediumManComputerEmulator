@@ -13,8 +13,36 @@ public class Emulator
 
     private bool stopped;
 
+    private void ReplaceLabels(string[] instructions)
+    {
+        int index = 0;
+
+        Dictionary<string, int> labelAddress = new();
+
+        foreach (var instruction in instructions)
+        {
+            if (instruction.StartsWith('#'))
+            {
+                labelAddress.Add(instruction.Substring(0,
+                    instruction.IndexOf(' ')),index);
+                instructions[index] = instruction.Substring(instruction.IndexOf(' ') + 1);
+            }
+
+            if (instructions[index].Contains('#'))
+            {
+                var label = instructions[index].Substring(instructions[index].IndexOf('#'));
+
+                instructions[index] = instructions[index].Replace(label,
+                    labelAddress[label].ToString());
+            }
+
+            index++;
+        }
+    }
+
     public void LoadProgram(string[] instructions)
     {
+        ReplaceLabels(instructions);
         for (int i = 0; i < instructions.Length; i++)
         {
             var instruction = InstructionDecoder.DecodeInstruction(instructions[i]);

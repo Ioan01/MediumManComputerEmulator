@@ -14,8 +14,10 @@ var emulator = new Emulator();
 
 emulator.LoadProgram(new []
 {
-    "INP R1,2",
+    "#START INP R1,2",
     "OUT R1,4",
+    "#END JMS #START",
+    "JMS #END",
     "HLT"
 });
 
