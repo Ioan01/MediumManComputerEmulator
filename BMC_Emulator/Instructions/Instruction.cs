@@ -25,11 +25,16 @@ public abstract class Instruction
     
     public static readonly Dictionary<string, short> Opcodes = new(new []
     {
-        new KeyValuePair<string, short>("INP",0x0000),
-        new KeyValuePair<string, short>("OUT",0x0001 << 10),
-        new KeyValuePair<string, short>("HLT",0x0004 << 10),
-        new KeyValuePair<string, short>("LDR",0x0002 << 10),
-        new KeyValuePair<string, short>("STR",0x0003 << 10)
+        new KeyValuePair<string, short>("INP",0x0),
+        new KeyValuePair<string, short>("OUT",0x1 << 10),
+        new KeyValuePair<string, short>("HLT",0x4 << 10),
+        new KeyValuePair<string, short>("LDR",0x2 << 10),
+        new KeyValuePair<string, short>("STR",0x3 << 10),
+        new KeyValuePair<string, short>("MOV",0x1C << 10),
+        new KeyValuePair<string, short>("JMS",0x5 << 10),
+        new KeyValuePair<string, short>("PSH",0x6 << 10),
+        new KeyValuePair<string, short>("POP",0x7 << 10),
+        new KeyValuePair<string, short>("RET",0x8 << 10)
         
     });
 
@@ -42,7 +47,7 @@ public abstract class Instruction
 
     protected short InstructionBinary { get; set; }
 
-    protected short GetBytes(int start, int end)
+    protected short GetBits(int start, int end)
     {
         short mask = 0;
 
@@ -63,7 +68,7 @@ public abstract class Instruction
     
     protected short RegisterToBinary(string register)
     {
-        return  (short)(Int16.Parse(register.Substring(1)));
+        return  Int16.Parse(register.Substring(1));
     }
     
 

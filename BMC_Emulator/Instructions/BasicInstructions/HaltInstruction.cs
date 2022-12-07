@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
-using BMC_Emulator.Instructions;
 
-namespace BMC_Emulator;
+namespace BMC_Emulator.Instructions.BasicInstructions;
 
 public class HaltInstruction : Instruction
 {

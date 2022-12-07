@@ -2,6 +2,7 @@ using System.Collections;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using BMC_Emulator.Instructions;
+using BMC_Emulator.Instructions.BasicInstructions;
 
 namespace BMC_Emulator;
 
@@ -21,8 +22,22 @@ public static class InstructionDecoder
                 return typeof(OutputInstruction);
             case "HLT":
                 return typeof(HaltInstruction);
+            case "STR":
+                return typeof(StoreInstruction);
+            case "LDR":
+                return typeof(LoadInstruction);
+            case "MOV":
+                return typeof(MoveInstruction);
+            case "PSH":
+                return typeof(PushInstruction);
+            case "POP":
+                return typeof(PopInstruction);
+            case "JMS":
+                return typeof(JumpInstruction);
+            case "RET":
+                return typeof(ReturnInstruction);
             default:
-                return typeof(Object);
+                throw new Exception("Bad instruction provided " + code);
         }
     }
     

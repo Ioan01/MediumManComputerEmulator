@@ -14,9 +14,9 @@ public class OutputInstruction : Instruction
     {
         
         
-        short value = emulator.Registers[GetBytes(10,10)];
+        short value = emulator.Registers[GetBits(10,10)];
 
-        switch (GetBytes(0,9))
+        switch (GetBits(0,9))
         {
             case 2:
                 emulator.Io.Output(value);

@@ -16,7 +16,7 @@ public class InputInstruction : Instruction
 
     public override void Execute(Emulator emulator)
     {
-        ref short value = ref emulator.Registers[GetBytes(10,10)];
+        ref short value = ref emulator.Registers[GetBits(10,10)];
 
         value = emulator.Io.Read();
 

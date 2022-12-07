@@ -11,9 +11,9 @@ public class Emulator
 
     private int programCounter;
 
-    private int stackPointer = BMC_Emulator.Memory.MemorySize;
+    public int StackPointer { get; set; } = Memory.MemorySize;
 
-    private int linkRegister = BMC_Emulator.Memory.MemorySize;
+    public int LinkRegister { get; set; } = Memory.MemorySize;
 
     private bool stopped;
 
@@ -49,6 +49,7 @@ public class Emulator
         ReplaceLabels(instructions);
         for (int i = 0; i < instructions.Length; i++)
         {
+            instructions[i] = instructions[i].ToUpper();
             var instruction = InstructionDecoder.DecodeInstruction(instructions[i]);
             Memory.Load(instruction.ToBinary(),i);
         }
