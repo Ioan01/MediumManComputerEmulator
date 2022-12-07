@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
+using BMC_Emulator.Instructions;
 
 namespace BMC_Emulator;
 

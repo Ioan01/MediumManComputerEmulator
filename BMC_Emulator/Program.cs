@@ -16,8 +16,6 @@ emulator.LoadProgram(new []
 {
     "#START INP R1,2",
     "OUT R1,4",
-    "#END JMS #START",
-    "JMS #END",
     "HLT"
 });
 

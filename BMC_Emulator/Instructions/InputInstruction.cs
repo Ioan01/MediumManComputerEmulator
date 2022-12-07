@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
+using BMC_Emulator.Instructions;
 
 namespace BMC_Emulator;
 
 public class InputInstruction : Instruction
 {
-    public InputInstruction(short word) : base(word)
+
+
+    protected override short GetLast10Bits()
     {
-    }
-    public InputInstruction(GroupCollection matchGroups) : base(matchGroups)
-    {
-        ArgumentsBinary = (short)((ushort)ArgumentsBinary | (RegisterToBinary(Arguments[0]) << 9) | (ushort)ToShort(Arguments[1]));
+        return (short)((RegisterToBinary(Arguments[0]) << 9) | (ushort)ToShort(Arguments[1]));
     }
 
     public override void Execute(Emulator emulator)
@@ -23,6 +23,11 @@ public class InputInstruction : Instruction
     }
 
 
+    public InputInstruction(GroupCollection matchGroups) : base(matchGroups)
+    {
+    }
 
-
+    public InputInstruction(short word) : base(word)
+    {
+    }
 }

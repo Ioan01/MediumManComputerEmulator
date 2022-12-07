@@ -1,17 +1,13 @@
 using System.Text.RegularExpressions;
+using BMC_Emulator.Instructions;
 
 namespace BMC_Emulator;
 
 public class OutputInstruction : Instruction
 {
-    public OutputInstruction(GroupCollection matchGroups) : base(matchGroups)
+    protected override short GetLast10Bits()
     {
-        ArgumentsBinary = (short)((ushort)ArgumentsBinary |  (RegisterToBinary(Arguments[0]) << 9) | (ushort)ToShort(Arguments[1]));
-
-    }
-
-    public OutputInstruction(short word) : base(word)
-    {
+        return  (short)((RegisterToBinary(Arguments[0]) << 9) | (ushort)ToShort(Arguments[1]));
     }
 
     public override void Execute(Emulator emulator)
@@ -35,5 +31,11 @@ public class OutputInstruction : Instruction
     }
 
 
-    
+    public OutputInstruction(GroupCollection matchGroups) : base(matchGroups)
+    {
+    }
+
+    public OutputInstruction(short word) : base(word)
+    {
+    }
 }

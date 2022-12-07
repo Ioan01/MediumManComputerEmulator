@@ -11,6 +11,10 @@ public class Emulator
 
     private int programCounter;
 
+    private int stackPointer = BMC_Emulator.Memory.MemorySize;
+
+    private int linkRegister = BMC_Emulator.Memory.MemorySize;
+
     private bool stopped;
 
     private void ReplaceLabels(string[] instructions)

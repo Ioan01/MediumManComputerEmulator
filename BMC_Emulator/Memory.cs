@@ -4,11 +4,13 @@ namespace BMC_Emulator;
 
 public class Memory
 {
-    private readonly short[] words = new short[512];
+    public static int MemorySize { get; } = 256;
+
+    private readonly short[] words = new short[MemorySize];
 
     public Memory()
     {
-        for (int i = 0; i < 512; i++)
+        for (int i = 0; i < MemorySize; i++)
         {
             words[i] = 0;
         }
