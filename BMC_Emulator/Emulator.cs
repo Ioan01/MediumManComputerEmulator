@@ -7,13 +7,13 @@ public class Emulator
     public IO Io { get; } = new();
 
     public short[] Registers { get; set; } = new short[2];
-    
 
-    private int programCounter;
+
+    public int ProgramCounter { get; set; }
 
     public int StackPointer { get; set; } = Memory.MemorySize;
 
-    public int LinkRegister { get; set; } = Memory.MemorySize;
+    public int LinkRegister { get; set; } = 0;
 
     private bool stopped;
 
@@ -60,10 +60,11 @@ public class Emulator
     {
         while (!stopped)
         {
-            var instruction = Memory.Read(programCounter);
+            var instruction = Memory.Read(ProgramCounter);
+            ProgramCounter++;
             var _instruction = InstructionDecoder.DecodeInstructionBinary(instruction);
             _instruction.Execute(this);
-            programCounter++;
+            
         }
     }
 

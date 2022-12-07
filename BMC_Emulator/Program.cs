@@ -11,12 +11,13 @@ var emulator = new Emulator();
 
 emulator.LoadProgram(new []
 {
-    "MOV R0,100",
+    "#START MOV R1,100",
     "OUT R1,2",
     "PSH R0",
     "PSH R0",
     "PSH R0",
     "POP R1",
+    "JMS #START",
     "HLT"
 });
 

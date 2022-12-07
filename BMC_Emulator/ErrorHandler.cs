@@ -11,4 +11,9 @@ public static class ErrorHandler
     {
         
     }
+
+    public static void HandleOutOfBoundsLinkRegister()
+    {
+        
+    }
 }
