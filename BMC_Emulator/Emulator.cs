@@ -15,6 +15,18 @@ public class Emulator
 
     public int LinkRegister { get; set; } = 0;
 
+    public bool Zero { get; set; } // Zero flag in the 4-bit Flag register
+
+    public bool Negative { get; set; } // Negative flag in the 4-bit Flag register
+
+    public bool Carry { get; set; } // Carry flag in the 4-bit Flag register
+
+    public bool Overflow { get; set; } // Overflow flag in the 4-bit Flag register
+
+    public short X { get; set; } // 16-bit general purpose register X
+
+    public short Y { get; set; } // 16-bit general purpose register Y
+
     private bool stopped;
 
     private void ReplaceLabels(string[] instructions)

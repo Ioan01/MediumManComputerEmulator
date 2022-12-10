@@ -13,6 +13,8 @@ emulator.LoadProgram(new []
 {
     "#START MOV R1,100",
     "OUT R1,2",
+    "ADD R1,10",
+    "OUT R1,2",
     "PSH R0",
     "PSH R0",
     "PSH R0",

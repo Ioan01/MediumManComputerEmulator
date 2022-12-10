@@ -8,7 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Instructions\ArithmeticInstructions" />
+      <Compile Remove="Instructions\ArithmeticInstructions\**" />
+      <EmbeddedResource Remove="Instructions\ArithmeticInstructions\**" />
+      <None Remove="Instructions\ArithmeticInstructions\**" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BMC_Emulator",
+    "\\BMC_Emulator\\Instructions",
+    "\\BMC_Emulator\\Instructions\\BasicInstructions",
+    "\\BMC_Emulator\\Instructions\\LogArithInstructions"
+  ],
+  "SelectedNode": "\\BMC_Emulator.sln",
+  "PreviewInSolutionExplorer": false
+}

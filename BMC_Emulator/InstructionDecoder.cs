@@ -36,6 +36,8 @@ public static class InstructionDecoder
                 return typeof(JumpInstruction);
             case "RET":
                 return typeof(ReturnInstruction);
+            case "ADD":
+                return typeof(ADDInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }
@@ -64,7 +66,4 @@ public static class InstructionDecoder
 
     }
     
-    
-
-
 }
