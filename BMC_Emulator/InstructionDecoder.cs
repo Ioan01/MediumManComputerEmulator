@@ -42,6 +42,12 @@ public static class InstructionDecoder
                 return typeof(SUBInstruction);
             case "MUL":
                 return typeof(MULInstruction);
+            case "OR":
+                return typeof(ORInstruction);
+            case "MOD":
+                return typeof(MODInstruction);
+            case "DIV":
+                return typeof(DIVInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }

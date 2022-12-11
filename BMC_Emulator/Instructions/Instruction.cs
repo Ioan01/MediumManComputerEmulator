@@ -37,8 +37,11 @@ public abstract class Instruction
         new KeyValuePair<string, short>("RET",0x8 << 10),
         new KeyValuePair<string, short>("ADD", 0x11 << 10),
         new KeyValuePair<string, short>("SUB", 0x12 << 10),
-        new KeyValuePair<string, short>("MUL", 0x13 << 10)
-        
+        new KeyValuePair<string, short>("MUL", 0x13 << 10),
+        new KeyValuePair<string, short>("OR", 0x17 << 10),
+        new KeyValuePair<string, short>("DIV", 0x14 << 10),
+        new KeyValuePair<string, short>("MOD", 0x15 << 10)
+
     });
 
     public static Dictionary<short, string> OpcodesReverse { get; } = Opcodes.ToDictionary(d => d.Value, d => d.Key);
