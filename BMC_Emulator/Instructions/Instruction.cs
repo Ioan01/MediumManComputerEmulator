@@ -35,7 +35,8 @@ public abstract class Instruction
         new KeyValuePair<string, short>("PSH",0x6 << 10),
         new KeyValuePair<string, short>("POP",0x7 << 10),
         new KeyValuePair<string, short>("RET",0x8 << 10),
-        new KeyValuePair<string, short>("ADD", 0x11 << 10)
+        new KeyValuePair<string, short>("ADD", 0x11 << 10),
+        new KeyValuePair<string, short>("SUB", 0x12 << 10)
         
     });
 

@@ -38,6 +38,8 @@ public static class InstructionDecoder
                 return typeof(ReturnInstruction);
             case "ADD":
                 return typeof(ADDInstruction);
+            case "SUB":
+                return typeof(SUBInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }

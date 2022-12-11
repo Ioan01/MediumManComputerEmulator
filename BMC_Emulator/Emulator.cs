@@ -23,10 +23,6 @@ public class Emulator
 
     public bool Overflow { get; set; } // Overflow flag in the 4-bit Flag register
 
-    public short X { get; set; } // 16-bit general purpose register X
-
-    public short Y { get; set; } // 16-bit general purpose register Y
-
     private bool stopped;
 
     private void ReplaceLabels(string[] instructions)
