@@ -8,7 +8,7 @@ namespace BMC_Emulator;
 
 public static class InstructionDecoder
 {
-    private static Regex instructionRegex = new Regex("[ \t]*([a-z]+)[ \t]*([0-9a-z]+)?,?([0-9a-z]+)?,?([0-9a-z]+)?",
+    private static Regex instructionRegex = new Regex("[ \t]*([a-z]+)[ \t]*([0-9a-z]+)?,?([-0-9a-z]+)?,?([0-9a-z]+)?",
         RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
 
@@ -40,6 +40,8 @@ public static class InstructionDecoder
                 return typeof(ADDInstruction);
             case "SUB":
                 return typeof(SUBInstruction);
+            case "MUL":
+                return typeof(MULInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }
