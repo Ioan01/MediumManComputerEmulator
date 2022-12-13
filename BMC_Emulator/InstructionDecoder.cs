@@ -48,6 +48,8 @@ public static class InstructionDecoder
                 return typeof(MODInstruction);
             case "DIV":
                 return typeof(DIVInstruction);
+            case "BRA":
+                return typeof(JumpInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }

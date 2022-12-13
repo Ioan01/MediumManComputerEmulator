@@ -65,7 +65,6 @@ public class Emulator
         for (int i = 0; i < instructions.Length; i++)
         {
             instructions[i] = instructions[i].ToUpper();
-            System.Console.WriteLine("ins: {0}", instructions[i]);
             var instruction = InstructionDecoder.DecodeInstruction(instructions[i]);
             Memory.Load(instruction.ToBinary(),i);
         }
