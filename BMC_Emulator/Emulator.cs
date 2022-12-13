@@ -31,6 +31,8 @@ public class Emulator
 
         Dictionary<string, int> labelAddress = new();
 
+        // first go through definitions     
+        // example: "#OUTPUT OUT R0,2"
         foreach (var instruction in instructions)
         {
             if (instruction.StartsWith('#'))
@@ -39,15 +41,20 @@ public class Emulator
                     instruction.IndexOf(' ')),index);
                 instructions[index] = instruction.Substring(instruction.IndexOf(' ') + 1);
             }
-
+            index++;
+        }
+        
+        // second go through usages     
+        // example: "JMS #OUTPUT"
+        index = 0;
+        foreach (var instruction in instructions)
+        {
             if (instructions[index].Contains('#'))
             {
                 var label = instructions[index].Substring(instructions[index].IndexOf('#'));
-
                 instructions[index] = instructions[index].Replace(label,
                     labelAddress[label].ToString());
             }
-
             index++;
         }
     }
@@ -58,6 +65,7 @@ public class Emulator
         for (int i = 0; i < instructions.Length; i++)
         {
             instructions[i] = instructions[i].ToUpper();
+            System.Console.WriteLine("ins: {0}", instructions[i]);
             var instruction = InstructionDecoder.DecodeInstruction(instructions[i]);
             Memory.Load(instruction.ToBinary(),i);
         }
