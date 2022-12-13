@@ -51,5 +51,17 @@ public class CMPInstruction : Instruction
             emulator.Zero = true;
             return;
         }
+        
+        if (valueA < valueB)
+        {
+            emulator.Negative = true;
+            return;
+        }
+        
+        if (valueA > valueB)
+        {
+            emulator.Carry = true;
+            return;
+        }
     }
 }

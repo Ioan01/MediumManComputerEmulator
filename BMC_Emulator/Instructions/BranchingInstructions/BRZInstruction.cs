@@ -2,13 +2,13 @@ using System.Text.RegularExpressions;
 
 namespace BMC_Emulator.Instructions.BranchingInstructions;
 
-public class BEQInstruction : Instruction
+public class BRZInstruction : Instruction
 {
-    public BEQInstruction(GroupCollection matchGroups) : base(matchGroups)
+    public BRZInstruction(GroupCollection matchGroups) : base(matchGroups)
     {
     }
 
-    public BEQInstruction(short word) : base(word)
+    public BRZInstruction(short word) : base(word)
     {
     }
 
@@ -24,7 +24,8 @@ public class BEQInstruction : Instruction
 
     public override void Execute(Emulator emulator)
     {
-        if (emulator is not { Zero: true, Carry: true })
+        // if accumulator != 0 return
+        if (emulator is not { Zero: true })
             return;
 
         emulator.LinkRegister = emulator.ProgramCounter + 1;
