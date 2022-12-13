@@ -41,7 +41,9 @@ public abstract class Instruction
         new KeyValuePair<string, short>("OR", 0x17 << 10),
         new KeyValuePair<string, short>("DIV", 0x14 << 10),
         new KeyValuePair<string, short>("MOD", 0x15 << 10),
+        new KeyValuePair<string, short>("CMP",0x9 << 10),
         new KeyValuePair<string, short>("BRA",0xA << 10),
+        new KeyValuePair<string, short>("BEQ",0xB << 10),
 
     });
 

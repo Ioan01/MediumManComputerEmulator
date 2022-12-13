@@ -3,6 +3,7 @@ using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using BMC_Emulator.Instructions;
 using BMC_Emulator.Instructions.BasicInstructions;
+using BMC_Emulator.Instructions.BranchingInstructions;
 
 namespace BMC_Emulator;
 
@@ -50,6 +51,10 @@ public static class InstructionDecoder
                 return typeof(DIVInstruction);
             case "BRA":
                 return typeof(JumpInstruction);
+            case "BEQ":
+                return typeof(BEQInstruction);
+            case "CMP":
+                return typeof(CMPInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }

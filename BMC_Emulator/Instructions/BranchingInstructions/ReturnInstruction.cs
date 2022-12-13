@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace BMC_Emulator.Instructions;
+namespace BMC_Emulator.Instructions.BranchingInstructions;
 
 public class ReturnInstruction : Instruction
 {
