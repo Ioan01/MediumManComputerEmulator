@@ -8,14 +8,21 @@ var emulator = new Emulator();
 
 emulator.LoadProgram(new[]
 {
-    "#START MOV R0,3",  // reg R0 = 3
-    "MUL R0,5",         // R0 = R0 * 3 => R0 = 15
-    "OUT R0,2",         // print R0 (15)
-    "MOV R1,15",        // reg R1 = 15
-    "CMP R0,R1",        // R0 == R1 true
-    "BEQ #HALT",        // go to HALT
-    "OUT R1,2",         // print R1 (14)
-    "#HALT HLT"         // expected result: 15
+    "JMS #HELLO",
+    "MOV R1,32",
+    "#LOOP OUT R1,4",
+    "ADD R1,1",
+    "CMP R1,100",
+    "BEQ #OUTPUT",
+    "BRA #LOOP",
+    "MOV R1,10",
+    "#OUTPUT OUT R1,4",
+    "HLT",
+    "#HELLO MOV R0,128",
+    "OUT R0,3",
+    "RET"
+// Output all the ASCII print characters
+
 });
 
 emulator.Run();
