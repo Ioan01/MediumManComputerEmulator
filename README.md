@@ -2,7 +2,6 @@
 ### Inspired by  [Peter Higginson's Online Emulator](https://peterhigginson.co.uk/RISC/)
 ##
 ##
-##
 ## Specifications:
 - 16-bit Operation Size (6 bit opcode and 10 bit arguments )
 - 256-Word (512 byte) Memory Size
@@ -18,6 +17,38 @@
         BRANCH/JUMP #LabelName
 - Immediate values : <operation name>, 0-255
 
+## Workflow
+- Program is loaded line by line into the Emulator. 
+- The emulator will first parse labels. For example if it encounters the label #LABELNAME at line 1 it will add it to an internal dictionary as [#LABELNAME,1] and will replace each further occurance of #LABELNAME with 1.
+- Then, the emulator will decode each instruction by matching the string with a regex to find out 
+-- the instruction
+-- the arguments
+- Depending on the operation name, it will instantiate an Instruction child class and pass the arguments to the constructor. For example, if STR is found, a StoreInstruction will be instantiated.
+- Then, the operation will parse the arguments and return a 16-bit integer representing the instruction bits.
+- These 16 bits are created by : (6-bit opcode  << 10) | (10 bits arguments)
+- For example for the instruction STR R0,127
+    The opcode of STR is 0x3 << 10 
+    Seeing as the first argument is register 0, the first bit from the argument bits will be 0
+    Since the second argument contains an immediate value, the next bit will be 1 to specify that an 8-bit immediate value is used. Therefore, the last 8 bits will represent our immedaite value.
+    Hence, we have 000 011 0000000000 (opcode) | 000 000 0 000000000 (register selector) | 000 000 0 1(bit that shows that the following 8 bits are an immediate value)01111111(8-bit immediate value)
+- Then, the 16-bit number is stored in the virtual memory at increasing addresses.
+- Then, we start the emulator, which will 
+    - Read the the 16-bit word at memory[ProgramCounter]
+    - Increment Program Counter
+    - Insantiate an Instruction child class based on the first 6 bits, and pass the following 10 bits as arguments
+    - Execute the Instruction passing the emulator as parameter to the Instruction
+   
+
+
+## Instruction Structure
+
+### 6-bit opcode and 10-bit arguments
+
+| o 	| o 	| o 	| o 	| o 	| o 	| a 	| a 	| a 	| a 	| a 	| a 	| a 	| a 	| a 	| a 	|
+|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|
+
+Since the first 6 bits, only the last 10 bits are usable as arguments. Usually, the first bit from the argument space is used as register selector/ register destination (if applicable) and the last 9 bits are used in the following manner : if the most significant bit in the last 9 bits is 1, then the following 8 bits are used as an immediate value in the operation - if that bit is 0, then the least significant bit from the following 8 bits is used to select the register from which the value will be extracted.
+
 ## Instructions
 #
 #
@@ -27,7 +58,7 @@
 | INP | 0x00                     | register selector                                                                        | input channel                                                                                                                                                                                                                                        | input - input channel 2 - ascii keyboard                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | OUT | 0x01                     | register selector                                                                        | input channel                                                                                                                                                                                                                                        | output - output channel 2 - numeric console, 3 - binary console, 4 - ascii console                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | LDR | 0x02                     | register selector                                                                        | 1st bit - whether load is done with adress from another register / immediate value<br>last 8 bits : memory address if immediate value is used / lsb register selector                                                                                | load reg ( in memory)                                                                                                                                                                           | LDR R0,R1<br>LDR R1,255<br>000010 0 0 000 0000 1<br>000010 1 1 1111 1111                                                                                                                                                                                                                                                                                                                                           |
-| STR | 0x03                     | register selector                                                                        | 1st bit - whether store is done with adress from another register / immediate value<br>last 8 bits : memory address if immediate value is used / lsb register selector                                                                               | store reg (in memory)                                                                                                                                                                           | STR R0, R1<br>STR R0,128                                                                                                                                                                                                                                                                                                                                                                                           |
+| STR | 0x03                     | register selector                                                                        | 1st bit - whether store is done with adress from another register / immediate value<br>last 8 bits : memory address if immediate value is used / lsb register selector                                                                               | store reg (in memory)                                                                                                                                                                           | STR R0, R1, STR R0,128                                                                                                                                                                                                                                                                                                                                                                                           |
 | HLT | 0x04                     | \-                                                                                       | \-                                                                                                                                                                                                                                                   | stop                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | JMS | 0x05                     | if 0, use register from lsb from the 9 bits, otherwise use 8 bit immediate address value | immediate value if used / register selector                                                                                                                                                                                                          | jump                                                                                                                                                                                            | JMS R0<br>000101 0 0000 0000 0<br>JMS 255<br>000101 1 01111 1111<br>JMS #LABEL                                                                                                                                                                                                                                                                                                                                     |
 | PSH | 0x06                     | register selector                                                                        | \-                                                                                                                                                                                                                                                   | stack push                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                    |
