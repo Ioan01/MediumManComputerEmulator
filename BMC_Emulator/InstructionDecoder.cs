@@ -59,6 +59,12 @@ public static class InstructionDecoder
                 return typeof(BRZInstruction);
             case "BMI":
                 return typeof(BMIInstruction);
+            case "BPL":
+                return typeof(BPLInstruction);
+            case "BGT":
+                return typeof(BPLInstruction);
+            case "BLT":
+                return typeof(BPLInstruction);
             default:
                 throw new Exception("Bad instruction provided " + code);
         }
