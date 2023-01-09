@@ -45,6 +45,12 @@ public static class InstructionDecoder
                 return typeof(MULInstruction);
             case "OR":
                 return typeof(ORInstruction);
+            case "AND":
+                return typeof(ANDInstruction);
+            case "XOR":
+                return typeof(XORInstruction);
+            case "NOT":
+                return typeof(NOTInstruction);
             case "MOD":
                 return typeof(MODInstruction);
             case "DIV":

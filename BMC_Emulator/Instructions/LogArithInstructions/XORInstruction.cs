@@ -4,13 +4,13 @@ using BMC_Emulator.Instructions;
 
 namespace BMC_Emulator
 {
-    public class ORInstruction : Instruction
+    public class XORInstruction : Instruction
     {
-        public ORInstruction(GroupCollection matchGroups) : base(matchGroups)
+        public XORInstruction(GroupCollection matchGroups) : base(matchGroups)
         {
         }
 
-        public ORInstruction(short word) : base(word)
+        public XORInstruction(short word) : base(word)
         {
         }
 
@@ -28,23 +28,23 @@ namespace BMC_Emulator
 
         public override void Execute(Emulator emulator)
         {
-            // Get the index of the register to which we will OR the value
+            // Get the index of the register to which we will XOR the value
             var regToBeStored = emulator.Registers[GetBits(10, 10)];
-            // Get the value that will be ORed with the register
-            short valueToOr = 0;
+            // Get the value that will be XORed with the register
+            var valueToXor = 0;
 
-            // If the 9th bit is set to 1, the value to OR is the value in the register whose index is specified in the last two bits of the instruction
+            // If the 9th bit is set to 1, the value to XOR is the value in the register whose index is specified in the last two bits of the instruction
             if (GetBits(9, 9) == 1)
             {
-                valueToOr = GetBits(0, 8);
+                valueToXor = GetBits(0, 8);
             }
             else
             {
-                // Otherwise, the value to OR is the value specified in the last 8 bits of the instruction
-                valueToOr = emulator.Registers[GetBits(0, 1)];
+                // Otherwise, the value to XOR is the value specified in the last 8 bits of the instruction
+                valueToXor = emulator.Registers[GetBits(0, 1)];
             }
 
-            var result = (regToBeStored != 0 || valueToOr != 0) ? (ushort)1 : (ushort)0;
+            var result = (ushort)((regToBeStored != 0) != (valueToXor != 0) ? 1 : 0);
 
             emulator.Carry = (result > short.MaxValue);
             emulator.Overflow = (result > short.MaxValue) || (result < short.MinValue);
