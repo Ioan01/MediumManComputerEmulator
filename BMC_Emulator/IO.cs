@@ -4,7 +4,11 @@ public class IO
 {
     public short Read()
     {
-        return (short)Console.Read();
+        var str = Console.ReadLine();
+        short num;
+        if (Int16.TryParse(str, out num))
+            return num;
+        else return (short)str[0];
     }
     
     
