@@ -1,0 +1,14 @@
+JMS #HELLO //asta e un comentariu
+MOV R1,32
+#LOOP OUT R1,4
+ADD R1,1
+CMP R1,100
+BEQ #OUTPUT 
+BRA #LOOP //asta e altul 
+MOV R1,10
+//hhhhhhh
+#OUTPUT OUT R1,4
+HLT
+#HELLO MOV R0,128
+OUT R0,3
+RET

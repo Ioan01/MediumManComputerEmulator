@@ -1,28 +1,27 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
-
-using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using BMC_Emulator;
+using BMC_Emulator.Instructions;
 
 var emulator = new Emulator();
+//Change path to your path (*^^*)
+string[] instructions = File.ReadAllLines("C:\\Users\\melis\\source\\repos\\MediumManComputerEmulator\\BMC_Emulator\\instructions.txt");
+instructions = instructions
+    .Where(x => !x.Trim().StartsWith("//")) // Removes lines that start with //
+    .Where(x => !string.IsNullOrWhiteSpace(x)) // Removes empty lines
+    .Select(x => x.Split("//")[0].Trim()) // Removes anything following a // on the same line
+    .ToArray();
 
-emulator.LoadProgram(new[]
-{
-    "JMS #HELLO",
-    "MOV R1,32",
-    "#LOOP OUT R1,4",
-    "ADD R1,1",
-    "CMP R1,100",
-    "BEQ #OUTPUT",
-    "BRA #LOOP",
-    "MOV R1,10",
-    "#OUTPUT OUT R1,4",
-    "HLT",
-    "#HELLO MOV R0,128",
-    "OUT R0,3",
-    "RET"
-// Output all the ASCII print characters
+// Check for invalid registers
+var invalidRegister = instructions
+    .SelectMany(line => Regex.Matches(line, @"(?i)R[1-9][0-9]+"))
+    .FirstOrDefault();
 
-});
+if (invalidRegister != null)
+    throw new Exception($"Invalid register: {invalidRegister.Value}");
 
+
+emulator.LoadProgram(instructions);
 emulator.Run();
