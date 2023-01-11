@@ -49,7 +49,9 @@ public abstract class Instruction
         new KeyValuePair<string, short>("BEQ",0xB << 10),
         new KeyValuePair<string, short>("BRZ",0xC << 10),
         new KeyValuePair<string, short>("BMI",0xD << 10),
-
+        new KeyValuePair<string, short>("BPL",0xE << 10),
+        new KeyValuePair<string, short>("BGT",0xF << 10),
+        new KeyValuePair<string, short>("BLT",0x10 << 10)
     });
 
     public static Dictionary<short, string> OpcodesReverse { get; } = Opcodes.ToDictionary(d => d.Value, d => d.Key);
