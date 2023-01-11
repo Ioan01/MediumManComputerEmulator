@@ -7,7 +7,7 @@ using BMC_Emulator.Instructions;
 
 var emulator = new Emulator();
 //Change path to your path (*^^*)
-string[] instructions = File.ReadAllLines("C:\\Users\\melis\\source\\repos\\MediumManComputerEmulator\\BMC_Emulator\\instructions.txt");
+string[] instructions = File.ReadAllLines("E:\\Users\\wotp3\\Source\\Repos\\MediumManComputerEmulator\\BMC_Emulator\\instructions.txt");
 instructions = instructions
     .Where(x => !x.Trim().StartsWith("//")) // Removes lines that start with //
     .Where(x => !string.IsNullOrWhiteSpace(x)) // Removes empty lines
